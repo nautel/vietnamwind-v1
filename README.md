@@ -19,6 +19,8 @@
 
 *Bản đồ tốc độ gió toàn quốc (trái) và Khu vực tiềm năng cao trên toàn quốc (phải) - Nationwide wind speed map (left) and High potential areas (right)*
 
+*File tương tác: `vietnam_wind_folium.html`, `vietnam_wind_interactive.html`*
+
 ### Phân tích cấp tỉnh | Provincial Analysis 
 
 #### Ninh Thuận - Tỉnh có tiềm năng gió cao nhất
@@ -29,15 +31,17 @@
 
 *Bản đồ tương tác tỉnh Ninh Thuận - một trong những khu vực có tiềm năng gió tốt nhất Việt Nam - Interactive map of Ninh Thuan province - one of the areas with the best wind potential in Vietnam*
 
-#### Đà Năng - Phân tích chi tiết
+*File tương tác: `vietnam_wind_folium_ninh_thuan.html`, `vietnam_wind_interactive_ninh_thuan.html`*
+
+#### Đà Nẵng - Phân tích chi tiết
 
 <p align="center">
-  <a href="vietnam_wind_folium_da_nang.html" target="_blank">
-    <img src="results/vietnam_wind_folium_da_nang.png" alt="Da Nang Wind Map" width="600">
-    <br>
-    <em>Bản đồ tương tác Đà Nẵng - Nhấp để xem bản đồ tương tác đầy đủ - Da Nang interactive map - Click to view full interactive map</em>
-  </a>
+  <img src="results/vietnam_wind_folium_da_nang.png" alt="Da Nang Wind Map" width="600">
 </p>
+
+*Bản đồ tương tác Đà Nẵng - Nhấp để xem bản đồ tương tác đầy đủ - Da Nang interactive map*
+
+*File tương tác: `vietnam_wind_folium_da_nang.html`*
 
 #### Gia Lai - Khu vực có tiềm năng cao ở Tây Nguyên
 
@@ -47,6 +51,8 @@
 </p>
 
 *Bản đồ tốc độ gió tỉnh Gia Lai (trái) và Khu vực tiềm năng cao tại Gia Lai (phải) - Gia Lai province wind speed map (left) and High potential areas (right)*
+
+*File tương tác: `vietnam_wind_folium_gia_lai.html`, `vietnam_wind_interactive_gia_lai.html`*
 
 ### ✨ Bản đồ tương tác | Interactive Map
 
@@ -58,15 +64,19 @@ Dự án cung cấp hai loại bản đồ tương tác:
 
 *Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
 
+*File tương tác: `vietnam_wind_folium.html`*
+
 <p align="center">
   <img src="assets/images/interactive_map_gia_lai.png" alt="Interactive Map Demo" width="600">
 </p>
 
 *Bản đồ tương tác tỉnh Gia Lai với thông tin chi tiết về tốc độ gió - Interactive map of Gia Lai province with detailed wind speed information*
 
-> 📌 **Lưu ý / Note**: Đây chỉ là hình ảnh tĩnh. Để trải nghiệm tương tác đầy đủ, hãy tạo và mở file HTML được tạo ra bằng lệnh dưới đây.
+*File tương tác: `vietnam_wind_interactive_gia_lai.html`*
+
+> 📌 **Lưu ý / Note**: Đây chỉ là hình ảnh tĩnh. Để trải nghiệm tương tác đầy đủ, hãy mở các file HTML được chú thích bên cạnh mỗi hình ảnh.
 >
-> This is just a static image. For full interactive experience, create and open the HTML file generated using the commands below.
+> These are just static images. For full interactive experience, open the HTML files noted beside each image.
 
 #### 🔍 Tạo bản đồ tương tác cho bất kỳ tỉnh nào | Create interactive map for any province
 
@@ -100,12 +110,12 @@ python demo.py --option 2
 ```
 
 <p align="center">
-  <a href="vietnam_wind_folium.html" target="_blank">
-    <img src="assets/images/folium_demo.png" alt="Folium Interactive Map Demo" width="600">
-    <br>
-    <em>Nhấp vào để xem bản đồ tương tác (Click to view interactive map)</em>
-  </a>
+  <img src="assets/images/folium_demo.png" alt="Folium Interactive Map Demo" width="600">
 </p>
+
+*Bản đồ tương tác folium với nhiều tính năng phân tích không gian - Folium interactive map with various spatial analysis features*
+
+*File tương tác: `vietnam_wind_folium.html`*
 
 Bản đồ tương tác cho phép:
 - Di chuột qua từng ô Voronoi để xem thông tin chi tiết về tốc độ gió
