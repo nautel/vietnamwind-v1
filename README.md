@@ -285,14 +285,6 @@ Tùy chọn demo / Demo options:
 0. Thoát / Exit
 ```
 
-<p align="center">
-  <img src="assets/images/workflow.png" alt="Workflow" width="600">
-</p>
-
-*Quy trình phân tích tiềm năng gió*
-
-*Wind potential analysis workflow*
-
 ### 🔄 Quy trình làm việc | Workflow Design
 
 <p align="center">
