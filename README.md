@@ -25,25 +25,58 @@
 
 *Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
 
+> 📌 **Lưu ý / Note**: Đây chỉ là hình ảnh tĩnh. Để trải nghiệm tương tác đầy đủ, hãy tạo và mở file HTML được tạo ra bằng lệnh dưới đây.
+>
+> This is just a static image. For full interactive experience, create and open the HTML file generated using the commands below.
+
 #### 🔍 Tạo bản đồ tương tác cho bất kỳ tỉnh nào | Create interactive map for any province
 
-Sử dụng file `interactive_map.py` để tạo bản đồ tương tác cho bất kỳ tỉnh nào:
+Dự án này cung cấp hai loại bản đồ tương tác:
 
+1. **Bản đồ tương tác HTML (mpld3)** - Cho phép hover chuột để xem thông tin chi tiết
+2. **Bản đồ tương tác Web (folium)** - Bản đồ trực quan dựa trên Leaflet.js, có thể zoom, pan và hiển thị tooltip
+
+##### Tạo bản đồ tương tác HTML
 ```bash
-# Tạo bản đồ tương tác cho tỉnh Gia Lai
+# Tạo bản đồ tương tác HTML cho tỉnh Gia Lai
 python interactive_map.py --region "Gia Lai"
 
-# Tạo bản đồ tương tác cho toàn bộ Việt Nam
+# Tạo bản đồ tương tác HTML cho toàn bộ Việt Nam
 python interactive_map.py
-
-# Liệt kê các tỉnh/thành phố có sẵn
-python interactive_map.py --list-regions
 ```
+
+##### Tạo bản đồ tương tác Web (đề xuất)
+```bash
+# Tạo bản đồ tương tác Web cho tỉnh Gia Lai
+python interactive_map.py --region "Gia Lai" --web
+
+# Tạo bản đồ tương tác Web cho toàn bộ Việt Nam
+python interactive_map.py --web
+```
+
+<p align="center">
+  <a href="vietnam_wind_folium_gia_lai.html" target="_blank">
+    <img src="assets/images/folium_demo.png" alt="Folium Interactive Map Demo" width="600">
+    <br>
+    <em>Nhấp vào để xem bản đồ tương tác (Click to view interactive map)</em>
+  </a>
+</p>
 
 Bản đồ tương tác cho phép:
 - Di chuột qua từng ô Voronoi để xem thông tin chi tiết về tốc độ gió
 - Phân tích tập trung vào bất kỳ tỉnh thành nào tại Việt Nam
 - Dễ dàng so sánh tiềm năng gió giữa các khu vực khác nhau
+- Zoom in/out và di chuyển bản đồ (folium)
+- Hiển thị/ẩn các lớp khác nhau (folium)
+
+#### Các tùy chọn khác | Other options
+```bash
+# Liệt kê các tỉnh/thành phố có sẵn
+python interactive_map.py --list-regions
+
+# Chạy trong chế độ tương tác (CLI menu)
+python interactive_map.py
+```
 
 ## 🚀 Tính năng chính | Key Features
 
