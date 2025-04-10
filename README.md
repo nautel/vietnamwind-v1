@@ -1,5 +1,4 @@
-# VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam 
-(Wind Potential Analysis in Vietnam)
+# VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam | Wind Potential Analysis in Vietnam
 
 <p align="center">
   <img src="results/vietnam_wind_data.png" alt="Wind Potential Map" width="700">
@@ -9,7 +8,20 @@
 
 *Wind potential analysis tool for Vietnam based on data from [Global Wind Atlas](https://globalwindatlas.info/area/Vietnam).*
 
-## 📊 Kết quả | Results
+## 📑 Mục lục | Table of Contents
+
+- [Kết quả | Results](#-kết-quả--results)
+  - [Phân tích toàn quốc | Nationwide Analysis](#phân-tích-toàn-quốc--nationwide-analysis)
+  - [Phân tích cấp tỉnh | Provincial Analysis](#phân-tích-cấp-tỉnh--provincial-analysis)
+  - [Bản đồ tương tác | Interactive Map](#-bản-đồ-tương-tác--interactive-map)
+- [Tính năng chính | Key Features](#-tính-năng-chính--key-features)
+- [Cài đặt | Installation](#-cài-đặt--installation)
+- [Sử dụng | Usage](#-sử-dụng--usage)
+- [Ứng dụng thực tế | Practical Applications](#-ứng-dụng-thực-tế--practical-applications)
+- [Thống kê tiềm năng gió | Wind Potential Statistics](#-thống-kê-tiềm-năng-gió--wind-potential-statistics)
+- [Lưu ý về hình ảnh | Notes about images](#-lưu-ý-về-hình-ảnh--notes-about-images)
+
+## �� Kết quả | Results
 
 ### Phân tích toàn quốc | Nationwide Analysis
 
