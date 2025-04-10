@@ -1,7 +1,7 @@
 # VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam
 
 <p align="center">
-  <img src="https://i.imgur.com/KtvJfI1.jpg" alt="Wind Potential Map" width="700">
+  <img src="assets/images/vietnam_wind_map.jpg" alt="Wind Potential Map" width="700">
 </p>
 
 *Công cụ phân tích tiềm năng gió tại Việt Nam dựa trên dữ liệu từ [Global Wind Atlas](https://globalwindatlas.info/area/Vietnam).*
@@ -11,8 +11,8 @@
 ## 📊 Kết quả | Results
 
 <p align="center">
-  <img src="https://i.imgur.com/lVUmR0B.png" alt="Wind Speed Map" width="400">
-  <img src="https://i.imgur.com/M8BgxB5.png" alt="High Potential Areas" width="400">
+  <img src="results/vietnam_wind_data_gia_lai.png" alt="Wind Speed Map" width="400">
+  <img src="results/vietnam_wind_high_potential_gia_lai.png" alt="High Potential Areas" width="400">
 </p>
 
 *Bản đồ tốc độ gió (trái) và Khu vực tiềm năng cao (phải) - Wind speed map (left) and High potential areas (right)*
@@ -20,7 +20,7 @@
 ### ✨ Bản đồ tương tác | Interactive Map
 
 <p align="center">
-  <img src="https://i.imgur.com/vjf6rYA.png" alt="Interactive Map Demo" width="600">
+  <img src="assets/images/interactive_map.png" alt="Interactive Map Demo" width="600">
 </p>
 
 *Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
@@ -108,7 +108,7 @@ Tùy chọn demo / Demo options:
 ```
 
 <p align="center">
-  <img src="https://i.imgur.com/vjf6rYA.png" alt="Workflow" width="600">
+  <img src="assets/images/workflow.png" alt="Workflow" width="600">
 </p>
 
 *Quy trình phân tích tiềm năng gió - Wind potential analysis workflow*
@@ -116,7 +116,7 @@ Tùy chọn demo / Demo options:
 ## 🏭 Ứng dụng thực tế | Practical Applications
 
 <p align="center">
-  <img src="https://i.imgur.com/8fzJIkH.jpg" alt="Wind Farm" width="600">
+  <img src="assets/images/wind_farm.jpg" alt="Wind Farm" width="600">
 </p>
 
 *Trang trại điện gió ở Việt Nam - Wind farm in Vietnam*
@@ -136,4 +136,14 @@ Dữ liệu phân tích từ công cụ này có thể được sử dụng đ�
 ## 📖 Xem thêm thông tin chi tiết | See more details
 
 Xem thêm thông tin chi tiết tại [vietnamwind/README.md](vietnamwind/README.md)
-*(See more detailed information at [vietnamwind/README.md](vietnamwind/README.md))* 
+*(See more detailed information at [vietnamwind/README.md](vietnamwind/README.md))*
+
+## 📝 Lưu ý về hình ảnh | Notes about images
+
+Để hiển thị đầy đủ hình ảnh trong README, vui lòng đảm bảo tải các hình ảnh vào thư mục tương ứng:
+- Các hình ảnh chung: `assets/images/`
+- Kết quả phân tích: `results/`
+
+*(To properly display images in this README, please ensure you upload images to the corresponding directories:*
+*- Common images: `assets/images/`*
+*- Analysis results: `results/`)* 
