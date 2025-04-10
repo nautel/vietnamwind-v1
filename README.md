@@ -36,7 +36,8 @@
 #### Đà Nẵng - Phân tích chi tiết
 
 <p align="center">
-  <img src="results/vietnam_wind_folium_da_nang.png" alt="Da Nang Wind Map" width="600">
+  <img src="results/vietnam_wind_data_da_nang.png" alt="Wind Speed Map - Da Nang" width="400">
+  <img src="results/vietnam_wind_high_potential_da_nang.png" alt="High Potential Areas - Da Nang" width="400">
 </p>
 
 *Bản đồ tương tác Đà Nẵng - Nhấp để xem bản đồ tương tác đầy đủ - Da Nang interactive map*
