@@ -21,7 +21,7 @@
 - [Thống kê tiềm năng gió | Wind Potential Statistics](#-thống-kê-tiềm-năng-gió--wind-potential-statistics)
 - [Lưu ý về hình ảnh | Notes about images](#-lưu-ý-về-hình-ảnh--notes-about-images)
 
-## �� Kết quả | Results
+## 🚀 Kết quả | Results
 
 ### Phân tích toàn quốc | Nationwide Analysis
 
@@ -292,6 +292,52 @@ Tùy chọn demo / Demo options:
 *Quy trình phân tích tiềm năng gió*
 
 *Wind potential analysis workflow*
+
+### 🔄 Quy trình làm việc | Workflow Design
+
+<p align="center">
+  <img src="assets/images/workflow_refined.png" alt="Refined Workflow" width="700">
+</p>
+
+*Quy trình phân tích được thiết kế theo phong cách tối giản*
+
+*Analysis workflow designed with minimalist style*
+
+Quy trình phân tích tiềm năng gió bao gồm 8 bước chính:
+
+The wind potential analysis workflow consists of 8 main steps:
+
+1. **Dữ liệu đầu vào | Input Data**
+   - Dữ liệu bản đồ Việt Nam và dữ liệu gió
+   - Vietnam map data and wind data
+
+2. **Đọc dữ liệu | Load Data**
+   - Đọc dữ liệu GeoJSON và raster
+   - Read GeoJSON and raster data
+
+3. **Chọn khu vực | Select Region**
+   - Toàn quốc hoặc tỉnh/thành cụ thể
+   - Nationwide or specific province
+
+4. **Tạo đa giác Voronoi | Create Voronoi Polygons**
+   - Phân chia không gian phân tích
+   - Divide analysis space
+
+5. **Tính thống kê gió | Calculate Wind Statistics**
+   - Tính toán các chỉ số gió cho mỗi vùng
+   - Calculate wind indices for each area
+
+6. **Hiển thị dữ liệu | Visualize Data**
+   - Tạo bản đồ, biểu đồ và số liệu thống kê
+   - Create maps, charts and statistics
+
+7. **Bản đồ tương tác | Interactive Map**
+   - Tạo bản đồ web có thể zoom/pan
+   - Create zoomable/pannable web maps
+
+8. **Xuất kết quả | Export Results**
+   - Lưu dữ liệu dưới dạng CSV, KML, HTML
+   - Save data as CSV, KML, HTML
 
 ## 🏭 Ứng dụng thực tế | Practical Applications
 
