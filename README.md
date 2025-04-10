@@ -20,10 +20,30 @@
 ### ✨ Bản đồ tương tác | Interactive Map
 
 <p align="center">
-  <img src="assets/images/interactive_map.png" alt="Interactive Map Demo" width="600">
+  <img src="assets/images/interactive_map_gia_lai.png" alt="Interactive Map Demo" width="600">
 </p>
 
 *Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
+
+#### 🔍 Tạo bản đồ tương tác cho bất kỳ tỉnh nào | Create interactive map for any province
+
+Sử dụng file `interactive_map.py` để tạo bản đồ tương tác cho bất kỳ tỉnh nào:
+
+```bash
+# Tạo bản đồ tương tác cho tỉnh Gia Lai
+python interactive_map.py --region "Gia Lai"
+
+# Tạo bản đồ tương tác cho toàn bộ Việt Nam
+python interactive_map.py
+
+# Liệt kê các tỉnh/thành phố có sẵn
+python interactive_map.py --list-regions
+```
+
+Bản đồ tương tác cho phép:
+- Di chuột qua từng ô Voronoi để xem thông tin chi tiết về tốc độ gió
+- Phân tích tập trung vào bất kỳ tỉnh thành nào tại Việt Nam
+- Dễ dàng so sánh tiềm năng gió giữa các khu vực khác nhau
 
 ## 🚀 Tính năng chính | Key Features
 
