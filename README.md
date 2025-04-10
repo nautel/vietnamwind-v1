@@ -1,9 +1,5 @@
 # VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam
 
-<p align="center">
-  <img src="results/vietnam_wind_data.png" alt="Wind Potential Map" width="700">
-</p>
-
 *Công cụ phân tích tiềm năng gió tại Việt Nam dựa trên dữ liệu từ [Global Wind Atlas](https://globalwindatlas.info/area/Vietnam).*
 
 *(Wind potential analysis tool for Vietnam based on data from [Global Wind Atlas](https://globalwindatlas.info/area/Vietnam).)*
@@ -58,12 +54,6 @@
 
 ### ✨ Bản đồ tương tác | Interactive Map
 
-Dự án cung cấp hai loại bản đồ tương tác:
-
-<p align="center">
-  <img src="assets/images/folium_demo.png" alt="Interactive Map Demo" width="600">
-</p>
-
 *Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
 
 *File tương tác: `vietnam_wind_folium.html`*
@@ -110,11 +100,6 @@ python demo.py
 # Phân tích một tỉnh cụ thể (chọn tùy chọn 2)
 python demo.py --option 2
 ```
-
-<p align="center">
-  <img src="assets/images/folium_demo.png" alt="Folium Interactive Map Demo" width="600">
-</p>
-
 *Bản đồ tương tác folium với nhiều tính năng phân tích không gian - Folium interactive map with various spatial analysis features*
 
 *File tương tác: `vietnam_wind_folium.html`*
