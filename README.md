@@ -127,7 +127,7 @@ python demo.py --option 2
 ```
 
 <p align="center">
-  <img src="assets/images/folium_demo.png" alt="Folium Interactive Map Demo" width="600">
+  <img src="assets/images/folium_demo.gif" alt="Folium Interactive Map Demo" width="600">
 </p>
 
 *Bản đồ tương tác folium với nhiều tính năng phân tích không gian*
