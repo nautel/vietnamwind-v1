@@ -361,12 +361,6 @@ Analysis data from this tool can be used to:
   
   Calculate energy production potential by region
 
-## 📖 Xem thêm thông tin chi tiết | See more details
-
-Xem thêm thông tin chi tiết tại [vietnamwind/README.md](vietnamwind/README.md)
-
-See more detailed information at [vietnamwind/README.md](vietnamwind/README.md)
-
 ## 📊 Thống kê tiềm năng gió | Wind Potential Statistics
 
 Bảng dưới đây cung cấp một số thống kê về tốc độ gió tại một số tỉnh thành có tiềm năng cao:
