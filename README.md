@@ -26,7 +26,8 @@
 #### Ninh Thuận - Tỉnh có tiềm năng gió cao nhất
 
 <p align="center">
-  <img src="assets/images/interactive_map_ninh_thuan.png" alt="Interactive Map - Ninh Thuan" width="600">
+  <img src="results/vietnam_wind_data_ninh_thuan.png" alt="Wind Speed Map - Ninh Thuan" width="400">
+  <img src="results/vietnam_wind_high_potential_ninh_thuan.png" alt="High Potential Areas - Ninh Thuan" width="400">
 </p>
 
 *Bản đồ tương tác tỉnh Ninh Thuận - một trong những khu vực có tiềm năng gió tốt nhất Việt Nam - Interactive map of Ninh Thuan province - one of the areas with the best wind potential in Vietnam*
@@ -36,7 +37,8 @@
 #### Đà Nẵng - Phân tích chi tiết
 
 <p align="center">
-  <img src="results/vietnam_wind_folium_da_nang.png" alt="Da Nang Wind Map" width="600">
+  <img src="results/vietnam_wind_data_da_nang.png" alt="Wind Speed Map - Da Nang" width="400">
+  <img src="results/vietnam_wind_high_potential_da_nang.png" alt="High Potential Areas - Da Nang" width="400">
 </p>
 
 *Bản đồ tương tác Đà Nẵng - Nhấp để xem bản đồ tương tác đầy đủ - Da Nang interactive map*
