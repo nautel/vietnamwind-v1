@@ -3,6 +3,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import rasterio
 import rasterio.plot
+import rasterio.mask
 from rasterstats import zonal_stats
 import numpy as np
 import os
@@ -179,7 +180,6 @@ class WindPotentialAnalyzer:
         if self.selected_region is not None and self.selected_region is not self.catchments:
             mask = None
             try:
-                import rasterio.mask
                 # Sử dụng ranh giới của khu vực đã chọn để mask dữ liệu gió
                 shapes = [geom.__geo_interface__ for geom in self.selected_region.geometry]
                 masked_data, masked_transform = rasterio.mask.mask(self.demdata, shapes, crop=True)
@@ -197,9 +197,22 @@ class WindPotentialAnalyzer:
             show_result = rasterio.plot.show(self.demdata, ax=ax, cmap='viridis')
             img = show_result.get_images()[0]  # Lấy đối tượng AxesImage từ kết quả
         
-        # Thêm thanh màu chú thích với thông tin tốc độ gió bằng tiếng Việt và tiếng Anh
-        cbar = plt.colorbar(img, ax=ax, shrink=0.8, pad=0.01)
-        cbar.set_label('Tốc độ gió (m/s) | Wind Speed (m/s)', fontsize=12)
+        # Thêm thanh màu chú thích với thông tin tốc độ gió bằng tiếng Việt và tiếng Anh - cải thiện phong cách Apple
+        # Tạo không gian riêng cho colorbar - đặt ở bên phải, sát với bản đồ hơn
+        cax = plt.axes([0.92, 0.2, 0.02, 0.6])  # [x, y, width, height] - Đưa cực gần với bản đồ
+        cbar = plt.colorbar(img, cax=cax, orientation='vertical')
+        
+        # Cập nhật phông chữ và kiểu dáng
+        cbar.set_label('Tốc độ gió (m/s) | Wind Speed (m/s)', 
+                       fontsize=12, 
+                       fontname='Arial', 
+                       fontweight='medium',
+                       labelpad=15)
+        cbar.ax.tick_params(labelsize=10, pad=8)
+        
+        # Thêm viền bo tròn và đổ bóng cho colorbar
+        # plt.setp(cbar.ax.spines.values(), visible=False)  # Ẩn viền của axes colorbar
+        # plt.setp(cbar.ax, facecolor='white', alpha=0.9)  # Cài đặt màu nền
         
         # Hiển thị ranh giới (Display boundaries) - chỉ hiển thị khu vực được chọn
         display_region.boundary.plot(ax=ax, color='red', linewidth=1.5)
@@ -210,37 +223,61 @@ class WindPotentialAnalyzer:
             region_centroid = self.selected_region.geometry.centroid.values[0]
             ax.text(region_centroid.x, region_centroid.y, region_name, 
                     color='red', fontsize=14, ha='center', va='center', 
-                    fontweight='bold', bbox=dict(facecolor='white', alpha=0.7))
+                    fontweight='bold', bbox=dict(facecolor='white', alpha=0.7, 
+                                                 boxstyle='round,pad=0.5',
+                                                 edgecolor='none'))
         
         # Thiết lập phạm vi hiển thị (Set display extent)
         buffer = (maxx - minx) * 0.05  # Tạo đệm 5% (Create a 5% buffer)
         ax.set_xlim(minx - buffer, maxx + buffer)
         ax.set_ylim(miny - buffer, maxy + buffer)
         
-        # Thêm tiêu đề (Add title)
+        # Thêm tiêu đề (Add title) - Cải thiện phong cách theo Apple
         if self.selected_region is not None and self.selected_region is not self.catchments:
             region_name = self.selected_region['name'].values[0]
-            title = f'Tốc độ gió tại {region_name} (m/s)\nWind Speed in {region_name} (m/s)'
+            title = f'Tốc độ gió tại {region_name}'
+            subtitle = f'Wind Speed in {region_name}'
         else:
-            title = 'Tốc độ gió tại Việt Nam (m/s)\nWind Speed in Vietnam (m/s)'
+            title = 'Tốc độ gió tại Việt Nam'
+            subtitle = 'Wind Speed in Vietnam'
         
-        ax.set_title(title, fontsize=14)
+        # Thêm tiêu đề chính và phụ theo phong cách Apple
+        ax.text(0.5, 1.05, title, 
+                fontsize=18, fontweight='bold', ha='center', va='center',
+                transform=ax.transAxes)
+        ax.text(0.5, 1.01, subtitle, 
+                fontsize=14, fontstyle='italic', alpha=0.7, ha='center', va='center',
+                transform=ax.transAxes)
         
-        # Thêm nhãn tọa độ (Add coordinate labels)
-        ax.set_xlabel('Kinh độ | Longitude', fontsize=10)
-        ax.set_ylabel('Vĩ độ | Latitude', fontsize=10)
+        # Định dạng các trục tọa độ theo phong cách tối giản
+        ax.set_xlabel('Kinh độ / Longitude', fontsize=10, labelpad=10)
+        ax.set_ylabel('Vĩ độ / Latitude', fontsize=10, labelpad=10)
         
-        # Thêm chú thích về tốc độ gió
-        ax.text(minx + (maxx - minx) * 0.02, miny + (maxy - miny) * 0.05, 
-                "Màu xanh đậm -> vàng -> đỏ: Tốc độ gió tăng dần\nDark blue -> yellow -> red: Increasing wind speed", 
-                fontsize=10, bbox=dict(facecolor='white', alpha=0.7))
+        # Tạo chú thích riêng theo phong cách Apple - đặt ở góc dưới bên phải
+        # Sử dụng nền mờ, bo góc và đổ bóng nhẹ
+        legend_props = dict(boxstyle='round,pad=0.8', 
+                            facecolor='white', 
+                            alpha=0.9,
+                            edgecolor='lightgray')
+        
+        # Làm đẹp biểu đồ
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_linewidth(0.5)
+        ax.spines['bottom'].set_linewidth(0.5)
+        ax.tick_params(axis='both', which='major', labelsize=9, width=0.5, length=4)
+        
+        # Thêm lưới mờ để dễ đọc
+        ax.grid(True, linestyle='--', alpha=0.3, color='gray')
+        
+        
+        plt.tight_layout(rect=[0, 0, 0.92, 0.95])  # Điều chỉnh lại bố cục để phù hợp với vị trí thanh màu mới
         
         if save_path:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
             print(f"Đã lưu biểu đồ tại: {save_path}")
             print(f"Figure saved at: {save_path}")
             
-        plt.tight_layout()
         return fig, ax
     
     def create_voronoi_polygons(self, num_points=100, random_state=42):
@@ -268,23 +305,154 @@ class WindPotentialAnalyzer:
         # Sử dụng vùng được chọn hoặc toàn bộ ranh giới
         boundary = self.selected_region if self.selected_region is not None else self.catchments
         
+        # Đảm bảo boundary có cùng hệ tọa độ
+        if boundary.crs is None:
+            print("Cảnh báo: Ranh giới không có hệ tọa độ được xác định. Sử dụng EPSG:4326.")
+            print("Warning: Boundary has no coordinate system. Using EPSG:4326.")
+            boundary.crs = "EPSG:4326"
+            
+        # Tạo bộ đệm âm (buffer nhỏ hơn ranh giới) để tránh các điểm nằm quá gần biên
+        buffered_boundary = boundary.copy()
+        try:
+            # Tính toán kích thước bộ đệm dựa trên phạm vi của ranh giới
+            minx, miny, maxx, maxy = boundary.total_bounds
+            width = maxx - minx
+            height = maxy - miny
+            buffer_size = -min(width, height) * 0.005  # Bộ đệm âm 0.5% kích thước nhỏ nhất
+            
+            # Áp dụng bộ đệm
+            buffered_boundary['geometry'] = boundary.geometry.buffer(buffer_size)
+            
+            # Kiểm tra nếu bộ đệm làm mất geometry
+            if buffered_boundary.geometry.is_empty.any():
+                print("Cảnh báo: Bộ đệm làm mất một số geometry. Sử dụng ranh giới gốc.")
+                print("Warning: Buffer resulted in empty geometries. Using original boundary.")
+                buffered_boundary = boundary.copy()
+        except Exception as e:
+            print(f"Lỗi khi tạo bộ đệm: {e}. Sử dụng ranh giới gốc.")
+            print(f"Error creating buffer: {e}. Using original boundary.")
+            buffered_boundary = boundary.copy()
+            
         # Lấy bounding box của ranh giới (Get the bounding box of the boundary)
-        minx, miny, maxx, maxy = boundary.total_bounds
+        minx, miny, maxx, maxy = buffered_boundary.total_bounds
         
-        # Tạo các điểm ngẫu nhiên trong bounding box (Create random points within the bounding box)
+        # Tạo các điểm điều khiển bổ sung cho Voronoi ở ngoài phạm vi ranh giới
+        # Các điểm này sẽ tạo các đa giác ở xa, giúp đảm bảo các đa giác gần ranh giới
+        # có kích thước hợp lý và không bị kéo dài vô hạn
+        # Create additional control points for Voronoi outside the boundary
+        # These points will create distant polygons, helping to ensure that polygons near the boundary
+        # have reasonable sizes and don't extend indefinitely
+        # Create additional control points for Voronoi outside the boundary
+        # These points will create distant polygons, helping to ensure that polygons near the boundary
+        # have reasonable sizes and don't extend indefinitely
+        extension_factor = 3.0  # Mở rộng phạm vi ra xa hơn để tránh các đa giác lớn
+        width = maxx - minx
+        height = maxy - miny
+        extended_minx = minx - width * extension_factor
+        extended_miny = miny - height * extension_factor
+        extended_maxx = maxx + width * extension_factor
+        extended_maxy = maxy + height * extension_factor
+        
+        # Tạo các điểm ngẫu nhiên chỉ trong phạm vi ranh giới
+        # Sử dụng phương pháp tạo nhiều điểm và lọc để đảm bảo số lượng điểm
         np.random.seed(random_state)
-        points = np.column_stack([
-            np.random.uniform(minx, maxx, num_points),
-            np.random.uniform(miny, maxy, num_points)
+        
+        # Phương pháp cải tiến: Tạo điểm trong ranh giới
+        # Improved method: Create points within the boundary
+        
+        # Tạo mask từ ranh giới
+        from shapely.geometry import Point
+        
+        # Tạo nhiều điểm hơn số lượng cần thiết để đảm bảo đủ điểm sau khi lọc
+        # Create more points than needed to ensure enough points after filtering
+        oversample_factor = 5
+        max_attempts = 10  # Số lần thử tối đa
+        
+        # Tạo các điểm trong ranh giới
+        points_within_boundary = []
+        attempts = 0
+        
+        while len(points_within_boundary) < num_points and attempts < max_attempts:
+            # Tạo nhiều điểm ngẫu nhiên trong bounding box
+            candidate_points = np.column_stack([
+                np.random.uniform(minx, maxx, num_points * oversample_factor),
+                np.random.uniform(miny, maxy, num_points * oversample_factor)
+            ])
+            
+            # Kiểm tra và chỉ giữ lại những điểm nằm trong ranh giới
+            for point in candidate_points:
+                if len(points_within_boundary) >= num_points:
+                    break
+                    
+                point_obj = Point(point[0], point[1])
+                if any(geom.contains(point_obj) for geom in buffered_boundary.geometry):
+                    points_within_boundary.append(point)
+            
+            attempts += 1
+        
+        # Nếu sau max_attempts vẫn không đủ điểm, sử dụng phương pháp phân bố đều
+        if len(points_within_boundary) < num_points:
+            print(f"Cảnh báo: Chỉ tạo được {len(points_within_boundary)} điểm trong ranh giới sau {max_attempts} lần thử.")
+            print(f"Warning: Only created {len(points_within_boundary)} points within boundary after {max_attempts} attempts.")
+            print("Sử dụng phương pháp phân bố đều để đạt đủ số lượng điểm.")
+            print("Using uniform distribution method to reach required number of points.")
+            
+            # Tạo lưới điểm đều
+            grid_size = int(np.ceil(np.sqrt(num_points)))
+            x = np.linspace(minx, maxx, grid_size)
+            y = np.linspace(miny, maxy, grid_size)
+            xx, yy = np.meshgrid(x, y)
+            grid_points = np.column_stack([xx.ravel(), yy.ravel()])
+            
+            # Lọc các điểm trong ranh giới
+            for point in grid_points:
+                if len(points_within_boundary) >= num_points:
+                    break
+                    
+                point_obj = Point(point[0], point[1])
+                if any(geom.contains(point_obj) for geom in buffered_boundary.geometry):
+                    points_within_boundary.append(point)
+        
+        # Cắt bớt nếu có quá nhiều điểm
+        if len(points_within_boundary) > num_points:
+            points_within_boundary = points_within_boundary[:num_points]
+            
+        points = np.array(points_within_boundary)
+        
+        # Thêm các điểm điều khiển ở ngoài ranh giới để tránh các đa giác kéo dài vô hạn
+        # Add control points outside the boundary to avoid infinitely extended polygons
+        num_control_points = 16
+        control_points = []
+        
+        # Tạo các điểm trên một vòng tròn lớn bao quanh phạm vi
+        angles = np.linspace(0, 2*np.pi, num_control_points, endpoint=False)
+        center_x = (minx + maxx) / 2
+        center_y = (miny + maxy) / 2
+        radius = np.sqrt(width**2 + height**2) * extension_factor
+        
+        for angle in angles:
+            x = center_x + radius * np.cos(angle)
+            y = center_y + radius * np.sin(angle)
+            control_points.append([x, y])
+            
+        # Thêm 4 điểm ở 4 góc xa
+        control_points.extend([
+            [extended_minx, extended_miny],
+            [extended_minx, extended_maxy],
+            [extended_maxx, extended_miny],
+            [extended_maxx, extended_maxy]
         ])
         
+        # Kết hợp các điểm trong ranh giới và điểm điều khiển
+        all_points = np.vstack([points, np.array(control_points)])
+        
         # Tạo đa giác Voronoi (Create Voronoi polygons)
-        vor = Voronoi(points)
+        vor = Voronoi(all_points)
         
         # Chuyển đổi đa giác Voronoi thành đa giác không gian địa lý
         # (Convert Voronoi polygons to geographic polygons)
         import shapely.geometry as geometry
-        from shapely.ops import cascaded_union
+        from shapely.ops import unary_union
         
         # Tạo từ điển để lưu các đa giác (Create dictionary to store polygons)
         region_polys = {}
@@ -293,7 +461,11 @@ class WindPotentialAnalyzer:
         print("Xử lý các đa giác Voronoi...")
         print("Processing Voronoi polygons...")
         
-        for i, region_idx in enumerate(tqdm(vor.point_region, desc="Tạo đa giác | Creating polygons")):
+        # Chỉ xử lý các vùng tương ứng với các điểm trong ranh giới 
+        # (bỏ qua các điểm điều khiển)
+        num_points_within_boundary = len(points)
+        
+        for i, region_idx in enumerate(tqdm(vor.point_region[:num_points_within_boundary], desc="Tạo đa giác | Creating polygons")):
             region = vor.regions[region_idx]
             
             if -1 not in region and len(region) > 0:
@@ -310,20 +482,70 @@ class WindPotentialAnalyzer:
         # Chuyển thành GeoDataFrame (Convert to GeoDataFrame)
         vonorol = gpd.GeoDataFrame(vonorol, geometry='geometry')
         
+        # Thiết lập hệ tọa độ giống ranh giới
+        vonorol.crs = boundary.crs
+        
         # Thêm chỉ số làm tên (Add index as name)
         vonorol['name'] = vonorol.index
         
-        # Cắt các đa giác theo ranh giới vùng được chọn
-        if self.selected_region is not None and self.selected_region is not self.catchments:
-            # Chuyển đổi CRS nếu cần
-            if vonorol.crs != self.selected_region.crs and vonorol.crs is not None:
-                vonorol = vonorol.to_crs(self.selected_region.crs)
-            elif vonorol.crs is None:
-                vonorol.crs = self.selected_region.crs
-                
-            print("Cắt các đa giác Voronoi theo ranh giới vùng được chọn...")
-            print("Clipping Voronoi polygons by selected region boundary...")
-            vonorol = gpd.clip(vonorol, self.selected_region.geometry.unary_union)
+        # Cắt các đa giác theo ranh giới
+        print("Cắt các đa giác Voronoi theo ranh giới...")
+        print("Clipping Voronoi polygons by boundary...")
+        
+        # Đảm bảo ranh giới là đa giác đơn nếu có thể
+        # (Ensure boundary is a single polygon if possible)
+        try:
+            # Tạo một polygon từ toàn bộ ranh giới
+            boundary_union = unary_union(boundary.geometry)
+            
+            # Cắt các đa giác Voronoi bằng ranh giới
+            clipped_voronoi = []
+            for idx, row in vonorol.iterrows():
+                try:
+                    # Cắt đa giác theo ranh giới
+                    intersection = row.geometry.intersection(boundary_union)
+                    
+                    # Chỉ giữ lại các đa giác có diện tích > 0
+                    if not intersection.is_empty and intersection.area > 0:
+                        clipped_voronoi.append({
+                            'geometry': intersection,
+                            'name': row['name']
+                        })
+                except Exception as e:
+                    print(f"Lỗi khi cắt đa giác {idx}: {e}")
+                    print(f"Error clipping polygon {idx}: {e}")
+            
+            # Tạo GeoDataFrame mới từ các đa giác đã cắt
+            if clipped_voronoi:
+                vonorol = gpd.GeoDataFrame(clipped_voronoi, crs=boundary.crs)
+            else:
+                print("Cảnh báo: Không có đa giác nào sau khi cắt. Sử dụng phương pháp clip thay thế.")
+                print("Warning: No polygons after clipping. Using alternative clip method.")
+                vonorol = gpd.clip(vonorol, boundary.geometry.unary_union)
+        except Exception as e:
+            print(f"Lỗi khi cắt các đa giác theo ranh giới: {e}. Sử dụng phương pháp clip đơn giản.")
+            print(f"Error clipping polygons by boundary: {e}. Using simple clip method.")
+            
+            # Sử dụng phương pháp clip đơn giản nếu phương pháp phức tạp gặp lỗi
+            try:
+                vonorol = gpd.clip(vonorol, boundary.geometry.unary_union)
+            except Exception as clip_error:
+                print(f"Lỗi khi sử dụng phương pháp clip đơn giản: {clip_error}")
+                print(f"Error using simple clip method: {clip_error}")
+                print("Tiếp tục mà không cắt các đa giác.")
+                print("Continuing without clipping polygons.")
+        
+        # Làm sạch các đa giác - loại bỏ các đa giác không hợp lệ hoặc quá nhỏ
+        print("Làm sạch các đa giác Voronoi...")
+        print("Cleaning Voronoi polygons...")
+        
+        # Loại bỏ các geometry rỗng hoặc không hợp lệ
+        valid_idx = []
+        for idx, row in vonorol.iterrows():
+            if row.geometry is not None and not row.geometry.is_empty and row.geometry.is_valid:
+                valid_idx.append(idx)
+        
+        vonorol = vonorol.loc[valid_idx].copy()
             
         self.voronoi_polygons = vonorol
         print(f"Đã tạo {len(self.voronoi_polygons)} đa giác Voronoi để phân tích.")
@@ -501,15 +723,6 @@ class WindPotentialAnalyzer:
             print(f"No areas found with average wind speed >= {min_wind_speed} m/s")
             return None, None
         
-        # Loại bỏ các đa giác có geometry là None
-        print("Kiểm tra và làm sạch dữ liệu...")
-        print("Checking and cleaning data...")
-        high_potential = high_potential[high_potential.geometry.notna()].copy()
-        if high_potential.empty:
-            print(f"Sau khi làm sạch dữ liệu, không còn khu vực nào có tốc độ gió >= {min_wind_speed} m/s")
-            print(f"After cleaning data, no areas left with wind speed >= {min_wind_speed} m/s")
-            return None, None
-        
         fig, ax = plt.subplots(figsize=figsize)
         
         # Xác định vùng hiển thị (Display region)
@@ -522,7 +735,6 @@ class WindPotentialAnalyzer:
         if self.selected_region is not None and self.selected_region is not self.catchments:
             mask = None
             try:
-                import rasterio.mask
                 # Sử dụng ranh giới của khu vực đã chọn để mask dữ liệu gió
                 shapes = [geom.__geo_interface__ for geom in self.selected_region.geometry]
                 masked_data, masked_transform = rasterio.mask.mask(self.demdata, shapes, crop=True)
@@ -539,15 +751,24 @@ class WindPotentialAnalyzer:
             show_result = rasterio.plot.show(self.demdata, ax=ax, cmap='viridis')
             img = show_result.get_images()[0]  # Lấy đối tượng AxesImage từ kết quả
         
-        # Thêm thanh màu chú thích với thông tin tốc độ gió bằng tiếng Việt và tiếng Anh
-        cbar = plt.colorbar(img, ax=ax, shrink=0.8, pad=0.01)
-        cbar.set_label('Tốc độ gió (m/s) | Wind Speed (m/s)', fontsize=12)
+        # Thêm thanh màu chú thích với thông tin tốc độ gió bằng tiếng Việt và tiếng Anh - cải thiện phong cách Apple
+        # Tạo không gian riêng cho colorbar - đặt ở bên phải, sát với bản đồ hơn
+        cax = plt.axes([0.92, 0.2, 0.02, 0.6])  # [x, y, width, height] - Đưa cực gần với bản đồ
+        cbar = plt.colorbar(img, cax=cax, orientation='vertical')
+        
+        # Cập nhật phông chữ và kiểu dáng
+        cbar.set_label('Tốc độ gió (m/s) | Wind Speed (m/s)', 
+                       fontsize=12, 
+                       fontname='Arial', 
+                       fontweight='medium',
+                       labelpad=15)
+        cbar.ax.tick_params(labelsize=10, pad=8)
         
         # Hiển thị ranh giới (Display boundaries) - chỉ hiển thị khu vực được chọn
         display_region.boundary.plot(ax=ax, color='red', linewidth=1.5)
         
         # Hiển thị các khu vực tiềm năng cao (Display high potential areas)
-        high_potential.plot(ax=ax, color='yellow', edgecolor='orange', alpha=0.6)
+        high_potential.plot(ax=ax, color='#FFCC00', edgecolor='#FF9900', alpha=0.6, linewidth=1.5)
         
         # Thêm nhãn cho các khu vực tiềm năng cao (Add labels for high potential areas)
         for idx, row in high_potential.iterrows():
@@ -556,9 +777,15 @@ class WindPotentialAnalyzer:
                 try:
                     centroid = row.geometry.centroid
                     avg_speed = row['wind_mean']
-                    ax.text(centroid.x, centroid.y, f"{avg_speed:.1f} m/s", 
-                            ha='center', va='center', fontsize=9, fontweight='bold',
-                            bbox=dict(facecolor='white', alpha=0.7, boxstyle='round,pad=0.2'))
+                    ax.text(centroid.x, centroid.y, f"{avg_speed:.1f}", 
+                            ha='center', va='center', 
+                            fontsize=9, 
+                            fontweight='bold',
+                            color='#333333',
+                            bbox=dict(facecolor='white', 
+                                     alpha=0.9, 
+                                     boxstyle='round,pad=0.3',
+                                     edgecolor='none'))
                 except Exception as e:
                     print(f"Lỗi khi xử lý geometry tại index {idx}: {e}")
                     print(f"Error processing geometry at index {idx}: {e}")
@@ -568,37 +795,75 @@ class WindPotentialAnalyzer:
         ax.set_xlim(minx - buffer, maxx + buffer)
         ax.set_ylim(miny - buffer, maxy + buffer)
         
-        # Thêm tiêu đề (Add title)
+        # Thêm tiêu đề (Add title) - Cải thiện phong cách theo Apple
         if self.selected_region is not None and self.selected_region is not self.catchments:
             region_name = self.selected_region['name'].values[0]
-            title = f'Khu vực có tiềm năng gió cao tại {region_name} (>= {min_wind_speed} m/s)\nHigh Wind Potential Areas in {region_name} (>= {min_wind_speed} m/s)'
+            title = f'Khu vực có tiềm năng gió cao tại {region_name}'
+            subtitle = f'High Wind Potential Areas in {region_name} (≥ {min_wind_speed} m/s)'
         else:
-            title = f'Khu vực có tiềm năng gió cao tại Việt Nam (>= {min_wind_speed} m/s)\nHigh Wind Potential Areas in Vietnam (>= {min_wind_speed} m/s)'
+            title = 'Khu vực có tiềm năng gió cao tại Việt Nam'
+            subtitle = f'High Wind Potential Areas in Vietnam (≥ {min_wind_speed} m/s)'
         
-        ax.set_title(title, fontsize=14)
+        # Thêm tiêu đề chính và phụ theo phong cách Apple
+        ax.text(0.5, 1.05, title, 
+                fontsize=18, fontweight='bold', ha='center', va='center',
+                transform=ax.transAxes)
+        ax.text(0.5, 1.01, subtitle, 
+                fontsize=14, fontstyle='italic', alpha=0.7, ha='center', va='center',
+                transform=ax.transAxes)
         
         # Thêm nhãn tọa độ (Add coordinate labels)
-        ax.set_xlabel('Kinh độ | Longitude', fontsize=10)
-        ax.set_ylabel('Vĩ độ | Latitude', fontsize=10)
+        ax.set_xlabel('Kinh độ / Longitude', fontsize=10, labelpad=10)
+        ax.set_ylabel('Vĩ độ / Latitude', fontsize=10, labelpad=10)
         
-        # Thêm chú thích (Add legend)
+        # Thêm chú thích - thiết kế theo phong cách Apple với hiệu ứng trong suốt
+        # Đặt ở góc dưới bên phải để không chồng lên dữ liệu quan trọng
         legend_elements = [
-            Patch(facecolor='yellow', edgecolor='orange', alpha=0.6, 
-                  label=f'Khu vực tiềm năng (>= {min_wind_speed} m/s) | Potential areas (>= {min_wind_speed} m/s)')
+            Patch(facecolor='#FFCC00', edgecolor='#FF9900', alpha=0.7, 
+                  label=f'Khu vực tiềm năng (≥ {min_wind_speed} m/s)')
         ]
-        ax.legend(handles=legend_elements, loc='lower right')
+        
+        legend = ax.legend(
+            handles=legend_elements, 
+            loc='lower right',
+            bbox_to_anchor=(0.98, 0.02),
+            fontsize=10,
+            framealpha=0.9,
+            facecolor='white',
+            edgecolor='lightgray',
+            frameon=True,
+            title='Chú thích / Legend'
+        )
+        
+        # Định dạng tiêu đề của chú thích
+        legend.get_title().set_fontweight('bold')
+        legend.get_title().set_fontsize(11)
         
         # Thêm chú thích về tốc độ gió
-        ax.text(minx + (maxx - minx) * 0.02, miny + (maxy - miny) * 0.05, 
-                "Màu xanh đậm -> vàng -> đỏ: Tốc độ gió tăng dần\nDark blue -> yellow -> red: Increasing wind speed", 
-                fontsize=10, bbox=dict(facecolor='white', alpha=0.7))
+        # Đặt ở góc dưới bên trái để không che khuất dữ liệu khu vực tiềm năng
+        note_props = dict(
+            boxstyle='round,pad=0.8',
+            facecolor='white', 
+            alpha=0.9,
+            edgecolor='lightgray'
+        )
+        
+        # Làm đẹp biểu đồ
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_linewidth(0.5)
+        ax.spines['bottom'].set_linewidth(0.5)
+        ax.tick_params(axis='both', which='major', labelsize=9, width=0.5, length=4)
+        
+        # Thêm lưới mờ để dễ đọc
+        ax.grid(True, linestyle='--', alpha=0.3, color='gray')
+        
         
         if save_path:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
             print(f"Đã lưu biểu đồ tại: {save_path}")
             print(f"Figure saved at: {save_path}")
-            
-        plt.tight_layout()
+        
         return fig, ax
     
     def export_detailed_statistics(self, output_dir, file_prefix="vietnam_wind_detailed", min_wind_speed=6.0):

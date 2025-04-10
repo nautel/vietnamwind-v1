@@ -1,7 +1,7 @@
 # VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam
 
 <p align="center">
-  <img src="assets/images/vietnam_wind_map.jpg" alt="Wind Potential Map" width="700">
+  <img src="results/vietnam_wind_data.png" alt="Wind Potential Map" width="700">
 </p>
 
 *Công cụ phân tích tiềm năng gió tại Việt Nam dựa trên dữ liệu từ [Global Wind Atlas](https://globalwindatlas.info/area/Vietnam).*
@@ -10,20 +10,59 @@
 
 ## 📊 Kết quả | Results
 
+### Phân tích toàn quốc | Nationwide Analysis
+
 <p align="center">
-  <img src="results/vietnam_wind_data_gia_lai.png" alt="Wind Speed Map" width="400">
-  <img src="results/vietnam_wind_high_potential_gia_lai.png" alt="High Potential Areas" width="400">
+  <img src="results/vietnam_wind_data.png" alt="Wind Speed Map" width="400">
+  <img src="results/vietnam_wind_high_potential.png" alt="High Potential Areas" width="400">
 </p>
 
-*Bản đồ tốc độ gió (trái) và Khu vực tiềm năng cao (phải) - Wind speed map (left) and High potential areas (right)*
+*Bản đồ tốc độ gió toàn quốc (trái) và Khu vực tiềm năng cao trên toàn quốc (phải) - Nationwide wind speed map (left) and High potential areas (right)*
+
+### Phân tích cấp tỉnh | Provincial Analysis 
+
+#### Ninh Thuận - Tỉnh có tiềm năng gió cao nhất
+
+<p align="center">
+  <img src="assets/images/interactive_map_ninh_thuan.png" alt="Interactive Map - Ninh Thuan" width="600">
+</p>
+
+*Bản đồ tương tác tỉnh Ninh Thuận - một trong những khu vực có tiềm năng gió tốt nhất Việt Nam - Interactive map of Ninh Thuan province - one of the areas with the best wind potential in Vietnam*
+
+#### Đà Năng - Phân tích chi tiết
+
+<p align="center">
+  <a href="vietnam_wind_folium_da_nang.html" target="_blank">
+    <img src="results/vietnam_wind_folium_da_nang.png" alt="Da Nang Wind Map" width="600">
+    <br>
+    <em>Bản đồ tương tác Đà Nẵng - Nhấp để xem bản đồ tương tác đầy đủ - Da Nang interactive map - Click to view full interactive map</em>
+  </a>
+</p>
+
+#### Gia Lai - Khu vực có tiềm năng cao ở Tây Nguyên
+
+<p align="center">
+  <img src="results/vietnam_wind_data_gia_lai.png" alt="Wind Speed Map - Gia Lai" width="400">
+  <img src="results/vietnam_wind_high_potential_gia_lai.png" alt="High Potential Areas - Gia Lai" width="400">
+</p>
+
+*Bản đồ tốc độ gió tỉnh Gia Lai (trái) và Khu vực tiềm năng cao tại Gia Lai (phải) - Gia Lai province wind speed map (left) and High potential areas (right)*
 
 ### ✨ Bản đồ tương tác | Interactive Map
+
+Dự án cung cấp hai loại bản đồ tương tác:
+
+<p align="center">
+  <img src="assets/images/folium_demo.png" alt="Interactive Map Demo" width="600">
+</p>
+
+*Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
 
 <p align="center">
   <img src="assets/images/interactive_map_gia_lai.png" alt="Interactive Map Demo" width="600">
 </p>
 
-*Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió - Interactive map with hover feature to view wind speed information*
+*Bản đồ tương tác tỉnh Gia Lai với thông tin chi tiết về tốc độ gió - Interactive map of Gia Lai province with detailed wind speed information*
 
 > 📌 **Lưu ý / Note**: Đây chỉ là hình ảnh tĩnh. Để trải nghiệm tương tác đầy đủ, hãy tạo và mở file HTML được tạo ra bằng lệnh dưới đây.
 >
@@ -41,21 +80,27 @@ Dự án này cung cấp hai loại bản đồ tương tác:
 # Tạo bản đồ tương tác HTML cho tỉnh Gia Lai
 python interactive_map.py --region "Gia Lai"
 
+# Tạo bản đồ tương tác HTML cho tỉnh Đà Nẵng với 200 điểm Voronoi để phân tích chi tiết hơn
+python interactive_map.py --region "Da Nang" --points 200
+
+# Tạo bản đồ tương tác HTML cho tỉnh Ninh Thuận - khu vực có tiềm năng gió cao
+python interactive_map.py --region "Ninh Thuan" 
+
 # Tạo bản đồ tương tác HTML cho toàn bộ Việt Nam
 python interactive_map.py
 ```
 
-##### Tạo bản đồ tương tác Web (đề xuất)
+##### Sử dụng demo.py để tạo bất kỳ loại bản đồ nào
 ```bash
-# Tạo bản đồ tương tác Web cho tỉnh Gia Lai
-python interactive_map.py --region "Gia Lai" --web
+# Chạy trong chế độ tương tác và chọn tùy chọn 4
+python demo.py
 
-# Tạo bản đồ tương tác Web cho toàn bộ Việt Nam
-python interactive_map.py --web
+# Phân tích một tỉnh cụ thể (chọn tùy chọn 2)
+python demo.py --option 2
 ```
 
 <p align="center">
-  <a href="vietnam_wind_folium_gia_lai.html" target="_blank">
+  <a href="vietnam_wind_folium.html" target="_blank">
     <img src="assets/images/folium_demo.png" alt="Folium Interactive Map Demo" width="600">
     <br>
     <em>Nhấp vào để xem bản đồ tương tác (Click to view interactive map)</em>
@@ -68,6 +113,9 @@ Bản đồ tương tác cho phép:
 - Dễ dàng so sánh tiềm năng gió giữa các khu vực khác nhau
 - Zoom in/out và di chuyển bản đồ (folium)
 - Hiển thị/ẩn các lớp khác nhau (folium)
+- Chọn giữa nhiều lớp bản đồ nền khác nhau
+- Đo đạc khoảng cách và diện tích
+- Tìm kiếm vị trí trên bản đồ
 
 #### Các tùy chọn khác | Other options
 ```bash
@@ -94,6 +142,8 @@ python interactive_map.py
   - *(Generate data visualization charts)*
 - 🖱️ Bản đồ tương tác cho phép hover chuột để xem thông tin tốc độ gió
   - *(Interactive map with mouse hover to view wind speed information)*
+- 🌐 Bản đồ web tương tác với các công cụ phân tích tiên tiến
+  - *(Interactive web map with advanced analysis tools)*
 
 ## 💻 Cài đặt | Installation
 
@@ -131,6 +181,10 @@ pip install -r vietnamwind/requirements.txt
 # Cài đặt thư viện mpld3 cho tính năng tương tác
 # Install mpld3 for interactive features
 pip install mpld3
+
+# Cài đặt folium cho bản đồ web tương tác
+# Install folium for interactive web maps
+pip install folium
 ```
 
 ## 🔧 Sử dụng | Usage
@@ -168,28 +222,41 @@ Tùy chọn demo / Demo options:
 
 ## 🏭 Ứng dụng thực tế | Practical Applications
 
-<p align="center">
-  <img src="assets/images/wind_farm.jpg" alt="Wind Farm" width="600">
-</p>
-
-*Trang trại điện gió ở Việt Nam - Wind farm in Vietnam*
-
 Dữ liệu phân tích từ công cụ này có thể được sử dụng để:
 - Xác định vị trí tiềm năng cho các dự án điện gió
 - Đánh giá khả thi về mặt kỹ thuật cho các dự án năng lượng tái tạo
 - Nghiên cứu phân bố tài nguyên gió trên toàn quốc
 - Hỗ trợ lập kế hoạch phát triển năng lượng bền vững
+- So sánh hiệu quả đầu tư giữa các khu vực khác nhau
+- Tính toán tiềm năng sản xuất năng lượng theo vùng
 
 *(Analysis data from this tool can be used to:*
 *- Identify potential locations for wind power projects*
 *- Assess technical feasibility for renewable energy projects*
 *- Study wind resource distribution across the country*
-*- Support sustainable energy development planning)*
+*- Support sustainable energy development planning*
+*- Compare investment efficiency between different regions*
+*- Calculate energy production potential by region)*
 
 ## 📖 Xem thêm thông tin chi tiết | See more details
 
 Xem thêm thông tin chi tiết tại [vietnamwind/README.md](vietnamwind/README.md)
 *(See more detailed information at [vietnamwind/README.md](vietnamwind/README.md))*
+
+## 📊 Thống kê tiềm năng gió | Wind Potential Statistics
+
+Bảng dưới đây cung cấp một số thống kê về tốc độ gió tại một số tỉnh thành có tiềm năng cao:
+
+| Tỉnh/Thành phố | Tốc độ gió trung bình (m/s) | Khu vực tiềm năng cao (%) |
+|----------------|-------------------------|--------------------------|
+| Ninh Thuận     | 7.2                     | 68%                      |
+| Bình Thuận     | 6.8                     | 51%                      |
+| Quảng Bình     | 5.9                     | 32%                      |
+| Gia Lai        | 5.8                     | 28%                      |
+| Đà Nẵng        | 5.5                     | 25%                      |
+| Toàn quốc      | 5.3                     | 22%                      |
+
+*Dữ liệu trên được tính toán cho độ cao 100m, dựa trên phân tích từ công cụ này*
 
 ## 📝 Lưu ý về hình ảnh | Notes about images
 
