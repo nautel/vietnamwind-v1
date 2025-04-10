@@ -1,0 +1,29 @@
+THỐNG KÊ CHI TIẾT VỀ TỐC ĐỘ GIÓ TẠI GIA LAI
+DETAILED WIND SPEED STATISTICS FOR GIA LAI
+
+I. THÔNG TIN CƠ BẢN | BASIC INFORMATION
+-----------------------------------
+Tổng số khu vực phân tích | Total analyzed areas: 89
+Số khu vực có tiềm năng cao (>6.0 m/s) | High potential areas (>6.0 m/s): 34
+Tỷ lệ khu vực có tiềm năng cao | Percentage of high potential areas: 38.20%
+
+II. THỐNG KÊ TỐC ĐỘ GIÓ | WIND SPEED STATISTICS
+-----------------------------------
+Tốc độ gió thấp nhất | Minimum wind speed: 2.93 m/s
+Tốc độ gió cao nhất | Maximum wind speed: 8.15 m/s
+Tốc độ gió trung bình | Average wind speed: 5.96 m/s
+Tốc độ gió trung vị | Median wind speed: 6.06 m/s
+Độ lệch chuẩn | Standard deviation: 1.14 m/s
+
+III. PHÂN PHỐI TỐC ĐỘ GIÓ | WIND SPEED DISTRIBUTION
+-----------------------------------
+Tốc độ gió (m/s) | Wind Speed (m/s) | Số lượng khu vực | Number of areas | Tỷ lệ | Percentage
+<3 m/s | 1 | 1.12%
+3-4 m/s | 1 | 1.12%
+4-5 m/s | 10 | 11.24%
+5-6 m/s | 21 | 23.60%
+6-7 m/s | 19 | 21.35%
+7-8 m/s | 13 | 14.61%
+8-9 m/s | 2 | 2.25%
+9-10 m/s | 0 | 0.00%
+>10 m/s | 0 | 0.00%

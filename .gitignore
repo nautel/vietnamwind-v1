@@ -11,4 +11,3 @@ env.bak/
 venv.bak/
 .ipynb_checkpoints
 data/*.tif
-results/
