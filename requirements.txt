@@ -1,0 +1,10 @@
+numpy>=1.19.0
+pandas>=1.1.0
+matplotlib>=3.3.0
+geopandas>=0.8.0
+rasterio>=1.1.0
+rasterstats>=0.15.0
+fiona>=1.8.0
+scipy>=1.5.0
+mpld3>=0.5.7
+tqdm>=4.45.0 

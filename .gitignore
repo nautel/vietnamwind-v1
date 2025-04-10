@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.ipynb_checkpoints
+data/*.tif
+results/
