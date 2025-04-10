@@ -1,4 +1,5 @@
-# VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam | Wind Potential Analysis in Vietnam
+# VietnamWind | 🇻🇳 Phân tích tiềm năng gió tại Việt Nam 
+(Wind Potential Analysis in Vietnam)
 
 <p align="center">
   <img src="results/vietnam_wind_data.png" alt="Wind Potential Map" width="700">
@@ -13,8 +14,7 @@
 ### Phân tích toàn quốc | Nationwide Analysis
 
 <p align="center">
-  <img src="results/vietnam_wind_data.png" alt="Wind Speed Map" width="400">
-  <img src="results/vietnam_wind_high_potential.png" alt="High Potential Areas" width="400">
+  <img src="results/vietnam_wind_high_potential.png" alt="High Potential Areas" width="700">
 </p>
 
 *Bản đồ tốc độ gió toàn quốc (trái) và Khu vực tiềm năng cao trên toàn quốc (phải)*
@@ -38,7 +38,7 @@
 
 *File tương tác | Interactive files: `vietnam_wind_folium_ninh_thuan.html`, `vietnam_wind_interactive_ninh_thuan.html`*
 
-#### Đà Nẵng - Phân tích chi tiết | Da Nang - Detailed Analysis
+#### Đà Năng - Phân tích chi tiết | Da Nang - Detailed Analysis
 
 <p align="center">
   <img src="results/vietnam_wind_data_da_nang.png" alt="Wind Speed Map - Da Nang" width="400">
@@ -66,29 +66,9 @@
 
 ### ✨ Bản đồ tương tác | Interactive Map
 
-<p align="center">
-  <img src="assets/images/folium_demo.png" alt="Interactive Map Demo" width="600">
-</p>
-
-*Bản đồ tương tác với tính năng hover để xem thông tin tốc độ gió*
-
-*Interactive map with hover feature to view wind speed information*
-
 *File tương tác | Interactive files: `vietnam_wind_folium.html`*
 
-<p align="center">
-  <img src="assets/images/interactive_map_gia_lai.png" alt="Interactive Map Demo" width="600">
-</p>
-
-*Bản đồ tương tác tỉnh Gia Lai với thông tin chi tiết về tốc độ gió*
-
-*Interactive map of Gia Lai province with detailed wind speed information*
-
 *File tương tác | Interactive files: `vietnam_wind_interactive_gia_lai.html`*
-
-> 📌 **Lưu ý**: Đây chỉ là hình ảnh tĩnh. Để trải nghiệm tương tác đầy đủ, hãy mở các file HTML được chú thích bên cạnh mỗi hình ảnh.
->
-> **Note**: These are just static images. For full interactive experience, open the HTML files noted beside each image.
 
 #### 🔍 Tạo bản đồ tương tác cho bất kỳ tỉnh nào | Create interactive map for any province
 
